@@ -28,9 +28,7 @@
     },
 
     /* Testing */
-    "types": ["vitest/jsdom", "jest"],
-
-    "include": ["src", "./setupTests.ts"]
+    "types": ["vitest/jsdom", "jest"]
   },
   "include": ["src"]
 }

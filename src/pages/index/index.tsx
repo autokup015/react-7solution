@@ -1,5 +1,17 @@
-const Index = () => {
-  return <div>Index pages</div>;
+import Index from "@/sections/index";
+
+const metadata = { title: "Homepage" };
+
+// ---------------------------------------------------------------------------------
+
+const IndexPage = () => {
+  return (
+    <>
+      <title>{metadata.title}</title>
+
+      <Index />
+    </>
+  );
 };
 
-export default Index;
+export default IndexPage;
