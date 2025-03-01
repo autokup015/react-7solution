@@ -1,4 +1,9 @@
-const MOCK_TODO = [
+type TMockTodo = {
+  type: "Fruit" | "Vegetable";
+  name: string;
+};
+
+const MOCK_TODO: Array<TMockTodo> = [
   {
     type: "Fruit",
     name: "Apple",
@@ -8,12 +13,12 @@ const MOCK_TODO = [
     name: "Broccoli",
   },
   {
-    type: "Vegetable",
-    name: "Mushroom",
-  },
-  {
     type: "Fruit",
     name: "Banana",
+  },
+  {
+    type: "Vegetable",
+    name: "Mushroom",
   },
   {
     type: "Vegetable",
@@ -46,3 +51,4 @@ const MOCK_TODO = [
 ];
 
 export { MOCK_TODO };
+export type { TMockTodo };

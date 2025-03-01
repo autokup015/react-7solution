@@ -11,9 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TodoListImport } from './routes/todo-list'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const TodoListRoute = TodoListImport.update({
+  id: '/todo-list',
+  path: '/todo-list',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +39,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/todo-list': {
+      id: '/todo-list'
+      path: '/todo-list'
+      fullPath: '/todo-list'
+      preLoaderRoute: typeof TodoListImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +53,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/todo-list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/todo-list'
+  id: '__root__' | '/' | '/todo-list'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TodoListRoute: typeof TodoListRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TodoListRoute: TodoListRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +96,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/todo-list"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/todo-list": {
+      "filePath": "todo-list.tsx"
     }
   }
 }

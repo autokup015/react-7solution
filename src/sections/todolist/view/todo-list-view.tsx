@@ -1,13 +1,73 @@
-import { Typography } from "@mui/material";
 import type { FC } from "react";
+
+import { Divider, Stack, styled, Typography } from "@mui/material";
+import TodoListItem from "../todo-list-item";
+import { useTodoList } from "../hook/use-todo-list";
+
+// ---------------------------------------------------------------------------------
+
+const StackItem = styled(Stack)({
+  width: "100%",
+  height: "100%",
+});
 
 // ---------------------------------------------------------------------------------
 
 const TodoListView: FC = () => {
+  const {
+    dataList,
+    fruitList,
+    vegetableList,
+    handleSelectItem,
+    handleDelToDataList,
+  } = useTodoList();
+
   return (
-    <>
-      <Typography variant="h4">TodoList</Typography>
-    </>
+    <Stack spacing={2} height="100%">
+      <Typography variant="h6">TodoList</Typography>
+
+      <Stack direction="row" spacing={3} height="100%">
+        <StackItem spacing={2}>
+          <Typography variant="h6" textAlign="center">
+            All
+          </Typography>
+
+          <TodoListItem
+            id="default"
+            data={dataList}
+            onClick={(item) => handleSelectItem(item)}
+          />
+        </StackItem>
+
+        <StackItem spacing={2}>
+          <Typography variant="h6" textAlign="center">
+            Fruit
+          </Typography>
+
+          <Divider />
+
+          <TodoListItem
+            id="fruit"
+            data={fruitList}
+            onClick={(item) => handleDelToDataList(item)}
+          />
+        </StackItem>
+
+        <StackItem spacing={2}>
+          <Typography variant="h6" textAlign="center">
+            Vegetable
+          </Typography>
+
+          <Divider />
+
+          <TodoListItem
+            id="vegetable"
+            data={vegetableList}
+            onClick={(item) => handleDelToDataList(item)}
+          />
+        </StackItem>
+      </Stack>
+    </Stack>
   );
 };
 

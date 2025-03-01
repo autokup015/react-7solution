@@ -1,44 +1,47 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
-import { useNavigate } from "@tanstack/react-router";
+import { Box, Divider, Stack, Typography, useTheme } from "@mui/material";
+import { LinkProps, useLocation, useNavigate } from "@tanstack/react-router";
 import { FC } from "react";
 
 // ---------------------------------------------------------------------------------
 
-type HeaderProps = {
+type THeaderProps = {
   padding: number;
+};
+
+type TMunuList = {
+  id: number;
+  name: string;
+  path: LinkProps["to"];
 };
 
 // ---------------------------------------------------------------------------------
 
-const MENU_LIST = [
+const MENU_LIST: Array<TMunuList> = [
   {
     id: 1,
     name: "Todo List",
-    link: "/todo-list",
+    path: "/todo-list",
   },
   {
     id: 2,
     name: "Api Dummy",
-    link: "/dummy",
+    path: "/",
   },
 ];
 
 // ---------------------------------------------------------------------------------
 
-const Header: FC<HeaderProps> = ({ padding }) => {
+const Header: FC<THeaderProps> = ({ padding }) => {
   const navigate = useNavigate();
 
-  // --------------------------- Function ---------------------------
+  const { pathname } = useLocation();
 
-  const handleRouter = (path: string) => {
-    console.log("path :>> ", path);
-    navigate({ to: "/" });
-  };
+  const theme = useTheme();
 
   return (
     <>
       <Stack direction="row" justifyContent="space-between" p={padding}>
-        <Box onClick={() => handleRouter("/")}>
+        <Box onClick={() => navigate({ to: "/" })}>
           <Typography
             variant="body1"
             sx={{ cursor: "pointer", textTransform: "uppercase" }}
@@ -49,7 +52,7 @@ const Header: FC<HeaderProps> = ({ padding }) => {
 
         <Stack direction="row" spacing={1}>
           {MENU_LIST.map((item) => (
-            <Box key={item.id} onClick={() => handleRouter(item.link)}>
+            <Box key={item.id} onClick={() => navigate({ to: item.path })}>
               <Typography
                 key={item.id}
                 variant="body1"
@@ -57,8 +60,12 @@ const Header: FC<HeaderProps> = ({ padding }) => {
                   textDecorationLine: "underline",
                   cursor: "pointer",
 
+                  ...(pathname === item.path && {
+                    color: theme.palette.primary.dark,
+                  }),
+
                   ":hover": {
-                    color: "blue",
+                    color: theme.palette.primary.light,
                   },
                 }}
               >
