@@ -1,9 +1,15 @@
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig, configDefaults } from "vitest/config";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  plugins: [
+    tsconfigPaths(),
+    TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
+    react(),
+  ],
+
   test: {
     ...configDefaults,
     globals: true,

@@ -1,4 +1,5 @@
-import { Divider, Stack, Typography } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
+import { useNavigate } from "@tanstack/react-router";
 import { FC } from "react";
 
 // ---------------------------------------------------------------------------------
@@ -12,38 +13,58 @@ type HeaderProps = {
 const MENU_LIST = [
   {
     id: 1,
-    name: "Home",
+    name: "Todo List",
+    link: "/todo-list",
   },
   {
     id: 2,
-    name: "Api",
+    name: "Api Dummy",
+    link: "/dummy",
   },
 ];
 
 // ---------------------------------------------------------------------------------
 
 const Header: FC<HeaderProps> = ({ padding }) => {
+  const navigate = useNavigate();
+
+  // --------------------------- Function ---------------------------
+
+  const handleRouter = (path: string) => {
+    console.log("path :>> ", path);
+    navigate({ to: "/" });
+  };
+
   return (
     <>
       <Stack direction="row" justifyContent="space-between" p={padding}>
-        <Typography variant="body1">test-7solution</Typography>
+        <Box onClick={() => handleRouter("/")}>
+          <Typography
+            variant="body1"
+            sx={{ cursor: "pointer", textTransform: "uppercase" }}
+          >
+            test - 7solution
+          </Typography>
+        </Box>
 
         <Stack direction="row" spacing={1}>
           {MENU_LIST.map((item) => (
-            <Typography
-              key={item.id}
-              variant="body1"
-              sx={{
-                textDecorationLine: "underline",
-                cursor: "pointer",
+            <Box key={item.id} onClick={() => handleRouter(item.link)}>
+              <Typography
+                key={item.id}
+                variant="body1"
+                sx={{
+                  textDecorationLine: "underline",
+                  cursor: "pointer",
 
-                ":hover": {
-                  color: "blue",
-                },
-              }}
-            >
-              {item.name}
-            </Typography>
+                  ":hover": {
+                    color: "blue",
+                  },
+                }}
+              >
+                {item.name}
+              </Typography>
+            </Box>
           ))}
         </Stack>
       </Stack>

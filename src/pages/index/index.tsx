@@ -1,4 +1,4 @@
-import Index from "@/sections/index";
+import IndexView from "@/sections/index/view/index-view";
 
 const metadata = { title: "Homepage" };
 
@@ -9,7 +9,7 @@ const IndexPage = () => {
     <>
       <title>{metadata.title}</title>
 
-      <Index />
+      <IndexView />
     </>
   );
 };
