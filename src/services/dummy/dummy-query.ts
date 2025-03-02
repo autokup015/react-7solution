@@ -113,3 +113,5 @@ const dummyKeys = {
 };
 
 export { dummyKeys, transformData };
+
+export type { TFirstTransformData };
