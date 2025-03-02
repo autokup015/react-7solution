@@ -103,10 +103,10 @@ const transformData = (data: TDummyResponse["users"]) => {
 const dummyKeys = {
   all: () => ["dummy"] as const,
 
-  dummyKeys: () => [...dummyKeys.all()],
+  dummyKeys: () => [...dummyKeys.all()] as const,
   dummyOption: () =>
     queryOptions({
-      queryKey: [...dummyKeys.all(), ENDPOINT.dummy] as const,
+      queryKey: [...dummyKeys.dummyKeys(), ENDPOINT.dummy] as const,
       queryFn: () => fetchDummy(),
       select: (response) => transformData(response.users),
     }),
