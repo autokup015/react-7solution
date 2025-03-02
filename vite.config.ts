@@ -24,6 +24,7 @@ export default defineConfig({
         "src/App.tsx",
         "eslint.config.js",
         "vite.config.ts",
+        "src/types",
       ],
     },
   },
