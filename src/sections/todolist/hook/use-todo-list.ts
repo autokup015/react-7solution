@@ -34,15 +34,19 @@ const useTodoList = () => {
     setDataList(delDataList);
 
     if (type === "Fruit") {
-      setFruitList((val) => [...val, data]);
+      const addFruit = [...fruitList, data];
 
-      handleStartTimeFruit();
+      setFruitList(addFruit);
+
+      handleStartTimeFruit(addFruit.length);
     }
 
     if (type === "Vegetable") {
-      setVegetableList((val) => [...val, data]);
+      const addVegetable = [...vegetableList, data];
 
-      handleStartTimeVegetable();
+      setVegetableList(addVegetable);
+
+      handleStartTimeVegetable(addVegetable.length);
     }
   };
 
@@ -54,7 +58,7 @@ const useTodoList = () => {
 
       setFruitList(delFruitList);
 
-      handleStartTimeFruit();
+      handleStartTimeFruit(delFruitList.length);
     }
 
     if (type === "Vegetable") {
@@ -64,7 +68,7 @@ const useTodoList = () => {
 
       setVegetableList(delVegetableList);
 
-      handleStartTimeVegetable();
+      handleStartTimeVegetable(delVegetableList.length);
     }
 
     // Default list
@@ -80,9 +84,14 @@ const useTodoList = () => {
 
   // ! --------------------------- Fruit ---------------------------
 
-  const handleStartTimeFruit = () => {
+  const handleStartTimeFruit = (countData: number) => {
     if (animationIdFruit) {
       stopTimeFruit();
+    }
+
+    if (!countData) {
+      stopTimeFruit();
+      return;
     }
 
     requestAnimationFrame(startKeepTimeFruit);
@@ -140,9 +149,14 @@ const useTodoList = () => {
 
   // ! --------------------------- Vegetable ---------------------------
 
-  const handleStartTimeVegetable = () => {
+  const handleStartTimeVegetable = (countData: number) => {
     if (animationIdVegetable) {
       stopTimeVegetable();
+    }
+
+    if (!countData) {
+      stopTimeVegetable();
+      return;
     }
 
     requestAnimationFrame(startKeepTimeVegetable);
@@ -204,6 +218,8 @@ const useTodoList = () => {
     dataList,
     fruitList,
     vegetableList,
+    timeFruit,
+    timeVegetable,
     handleSelectItem,
     handleDelToDataList,
   };

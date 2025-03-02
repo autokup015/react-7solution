@@ -11,7 +11,7 @@ type TUser = {
   lastName: string;
   maidenName: string;
   age: number;
-  gender: string;
+  gender: "male" | "female";
   email: string;
   phone: string;
   username: string;
@@ -92,4 +92,16 @@ type TCrypto = {
   network: string;
 };
 
-export type { TDummyResponse };
+type TTransformDataResponse<T> = Record<string, TransformData<T>>;
+
+type TransformData<T> = {
+  male: number;
+  female: number;
+  ageRange: T;
+  hair: TransformHair;
+  addressUser: Record<string, string>;
+};
+
+type TransformHair = Record<string, number>;
+
+export type { TDummyResponse, TTransformDataResponse };

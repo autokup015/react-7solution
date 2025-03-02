@@ -25,7 +25,7 @@ const MENU_LIST: Array<TMunuList> = [
   {
     id: 2,
     name: "Api Dummy",
-    path: "/",
+    path: "/dummy",
   },
 ];
 

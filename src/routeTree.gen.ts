@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TodoListImport } from './routes/todo-list'
+import { Route as DummyImport } from './routes/dummy'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -19,6 +20,12 @@ import { Route as IndexImport } from './routes/index'
 const TodoListRoute = TodoListImport.update({
   id: '/todo-list',
   path: '/todo-list',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DummyRoute = DummyImport.update({
+  id: '/dummy',
+  path: '/dummy',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,6 +46,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/dummy': {
+      id: '/dummy'
+      path: '/dummy'
+      fullPath: '/dummy'
+      preLoaderRoute: typeof DummyImport
+      parentRoute: typeof rootRoute
+    }
     '/todo-list': {
       id: '/todo-list'
       path: '/todo-list'
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dummy': typeof DummyRoute
   '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dummy': typeof DummyRoute
   '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/dummy': typeof DummyRoute
   '/todo-list': typeof TodoListRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/todo-list'
+  fullPaths: '/' | '/dummy' | '/todo-list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/todo-list'
-  id: '__root__' | '/' | '/todo-list'
+  to: '/' | '/dummy' | '/todo-list'
+  id: '__root__' | '/' | '/dummy' | '/todo-list'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DummyRoute: typeof DummyRoute
   TodoListRoute: typeof TodoListRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DummyRoute: DummyRoute,
   TodoListRoute: TodoListRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/dummy",
         "/todo-list"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/dummy": {
+      "filePath": "dummy.tsx"
     },
     "/todo-list": {
       "filePath": "todo-list.tsx"
