@@ -218,8 +218,6 @@ const useTodoList = () => {
     dataList,
     fruitList,
     vegetableList,
-    timeFruit,
-    timeVegetable,
     handleSelectItem,
     handleDelToDataList,
   };

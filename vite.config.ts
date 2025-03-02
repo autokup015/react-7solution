@@ -17,11 +17,9 @@ export default defineConfig({
     setupFiles: "./setupTests.ts",
     coverage: {
       exclude: [
-        "**/__test__/**",
+        "**/__tests__/**",
         "public",
-        "src/locales",
-        "src/layout",
-        "src/router",
+        "src/routes",
         "src/main.tsx",
         "src/App.tsx",
         "eslint.config.js",

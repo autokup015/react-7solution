@@ -11,7 +11,7 @@ const DummyView: FC = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify(dummyData, null, 4)}</pre>
+      <pre data-testid="pre-response">{JSON.stringify(dummyData, null, 4)}</pre>
     </div>
   );
 };

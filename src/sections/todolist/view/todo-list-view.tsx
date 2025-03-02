@@ -18,8 +18,6 @@ const TodoListView: FC = () => {
     dataList,
     fruitList,
     vegetableList,
-    timeFruit,
-timeVegetable,
     handleSelectItem,
     handleDelToDataList,
   } = useTodoList();
@@ -43,7 +41,7 @@ timeVegetable,
 
         <StackItem spacing={2}>
           <Typography variant="h6" textAlign="center">
-            Fruit {timeFruit.toFixed(0)}
+            Fruit
           </Typography>
 
           <Divider />
@@ -57,7 +55,7 @@ timeVegetable,
 
         <StackItem spacing={2}>
           <Typography variant="h6" textAlign="center">
-            Vegetable {timeVegetable.toFixed(0)}
+            Vegetable
           </Typography>
 
           <Divider />

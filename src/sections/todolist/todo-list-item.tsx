@@ -16,6 +16,7 @@ const TodoListItem: FC<TItemListProps> = ({ id, data, onClick }) => {
     <>
       {data.map((item, index) => (
         <Box
+          data-testid={`item-${item.type}-${item.name}`}
           key={`${id}-${item.name}-${index}`}
           component="div"
           onClick={() => onClick(item)}
